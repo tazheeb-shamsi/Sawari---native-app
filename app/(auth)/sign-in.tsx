@@ -12,7 +12,7 @@ const SignIn = () => {
     password: "",
   });
   const onSignInPress = async () => {
-    console.log("Sign Ip Pressed");
+    console.log("Sign In Pressed");
   };
 
   return (
@@ -45,7 +45,7 @@ const SignIn = () => {
               onChangeText={(value) => setForm({ ...form, password: value })}
             />
             <CustomButton
-              title="Sign Up"
+              title="Sign In"
               onPress={onSignInPress}
               className="mt-6"
             />
@@ -57,7 +57,7 @@ const SignIn = () => {
               className="text-lg text-center text-general-200 mt-10"
             >
               <Text>Don't have an account? </Text>
-              <Text className="text-primary-500">Sign In</Text>
+              <Text className="text-primary-500">Sign Up</Text>
             </Link>
 
             {/* Verification Modal*/}
