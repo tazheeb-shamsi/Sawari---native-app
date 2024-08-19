@@ -182,7 +182,7 @@ const SignUp = () => {
               <CustomButton
                 title="Go to Home"
                 onPress={() => {
-                  setShowSuccess(false);
+                  setShowSuccessModal(false);
                   router.push("/(root)/(tabs)/home");
                 }}
                 className="mt-5"
