@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonProps } from "@/types/type";
 import { Text, TouchableOpacity } from "react-native";
-import { getBgVariantStyle, getTextVariantStyle } from "@/utils/";
+import { getBgVariantStyle, getTextVariantStyle } from "@/utils/utils";
 
 const CustomButton = ({
   onPress,

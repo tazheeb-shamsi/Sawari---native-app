@@ -2,6 +2,8 @@ import { ButtonProps } from "@/types/type";
 
 export const getBgVariantStyle = (variant: ButtonProps["bgVariant"]) => {
   switch (variant) {
+    case "primary":
+      return "bg-[#0286FF]";
     case "secondary":
       return "bg-gray-500";
     case "danger":
