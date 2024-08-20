@@ -8,6 +8,7 @@ import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
 import OAuth from "@/components/OAuth";
 import { icons, images } from "@/constants";
+import { fetchAPI } from "@/lib/fetch";
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -41,7 +42,6 @@ const SignUp = () => {
       Alert.alert("Error", err.errors[0].longMessage);
     }
   };
-
   const onPressVerify = async () => {
     if (!isLoaded) return;
     try {
@@ -49,8 +49,14 @@ const SignUp = () => {
         code: verification.code,
       });
       if (completeSignUp.status === "complete") {
-        // TODO: Create a new user to the database!.
-
+        await fetchAPI("/(api)/user", {
+          method: "POST",
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            clerkId: completeSignUp.createdUserId,
+          }),
+        });
         await setActive({ session: completeSignUp.createdSessionId });
         setVerification({
           ...verification,
@@ -186,5 +192,4 @@ const SignUp = () => {
     </ScrollView>
   );
 };
-
 export default SignUp;
