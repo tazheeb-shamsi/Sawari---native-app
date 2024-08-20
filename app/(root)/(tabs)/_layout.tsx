@@ -64,7 +64,7 @@ const Layout = () => (
     <Tabs.Screen
       name="chat"
       options={{
-        headerShown: true,
+        headerShown: false,
         title: "Chats",
         tabBarIcon: ({ focused }) => (
           <TabBarIcon focused={focused} source={icons.chat} />
@@ -74,7 +74,7 @@ const Layout = () => (
     <Tabs.Screen
       name="rides"
       options={{
-        headerShown: true,
+        headerShown: false,
         title: "Your Rides",
         tabBarIcon: ({ focused }) => (
           <TabBarIcon focused={focused} source={icons.list} />
@@ -84,7 +84,7 @@ const Layout = () => (
     <Tabs.Screen
       name="profile"
       options={{
-        headerShown: true,
+        headerShown: false,
         title: "Profile",
         tabBarIcon: ({ focused }) => (
           <TabBarIcon focused={focused} source={icons.profile} />
