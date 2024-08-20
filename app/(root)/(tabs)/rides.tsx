@@ -1,7 +1,7 @@
-import React from "react";
+import { Text } from "react-native";
 
 const Rides = () => {
-  return <div>Ride History</div>;
+  return <Text>Ride History</Text>;
 };
 
 export default Rides;
