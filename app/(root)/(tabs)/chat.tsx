@@ -1,7 +1,11 @@
-import { Text } from "react-native";
+import { SafeAreaView, Text } from "react-native";
 
 const Chat = () => {
-  return <Text>Chat</Text>;
+  return (
+    <SafeAreaView>
+      <Text>Chat</Text>
+    </SafeAreaView>
+  );
 };
 
 export default Chat;
