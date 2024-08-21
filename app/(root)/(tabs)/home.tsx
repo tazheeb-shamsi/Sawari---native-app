@@ -50,7 +50,7 @@ export default function Page() {
                   Welcome 👋 {""}
                 </Text>
 
-                <Text className="text-xl text-primary-500 font-JakartaSemiBold">
+                <Text className="text-2xl text-primary-500 font-JakartaSemiBold">
                   {user?.firstName ||
                     user?.emailAddresses[0].emailAddress.split("@")[0]}
                 </Text>
