@@ -1,8 +1,11 @@
+import GoogleTextInput from "@/components/GoogleTextInput";
+import Map from "@/components/Map";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
 import { recentRides } from "@/mocks/mockRides";
+import useLocationStore from "@/store";
 import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -12,10 +15,38 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import * as Location from "expo-location";
 
 export default function Page() {
+  const { setUserLocation, setDestinationLocation } = useLocationStore();
   const { user } = useUser();
+
   const [loading, setLoading] = useState(false);
+  const [hasPermissions, setHasPermissions] = useState(false);
+
+  const handleSignOut = () => {};
+  const handleDirectionPress = () => {};
+
+  useEffect(() => {
+    const reqLocation = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setHasPermissions(false);
+      }
+      let location = await Location.getCurrentPositionAsync();
+      const address = await Location.reverseGeocodeAsync({
+        latitude: location.coords?.latitude!,
+        longitude: location.coords?.longitude!,
+      });
+
+      setUserLocation({
+        latitude: location.coords?.latitude!,
+        longitude: location.coords?.longitude!,
+        address: `${address[0].name}, ${address[0].region}, ${address[0].country}`,
+      });
+    };
+    reqLocation();
+  }, []);
 
   return (
     <SafeAreaView className="bg-general-500">
@@ -50,7 +81,7 @@ export default function Page() {
                   Welcome 👋 {""}
                 </Text>
 
-                <Text className="text-2xl text-primary-500 font-JakartaSemiBold">
+                <Text className="text-2xl text-primary-500 font-JakartaSemiBold capitalize">
                   {user?.firstName ||
                     user?.emailAddresses[0].emailAddress.split("@")[0]}
                 </Text>
@@ -58,12 +89,30 @@ export default function Page() {
 
               <TouchableOpacity
                 className="flex flex-col items-center gap-x-2 "
-                onPress={() => console.log("--> logout")}
+                onPress={handleSignOut}
               >
                 <Image source={icons.out} className="w-6 h-6 " />
                 <Text className="text-md font-JakartaMedium ">Logout!</Text>
               </TouchableOpacity>
             </View>
+
+            <GoogleTextInput
+              icon={icons.search}
+              containerStyle="bg-white shadow-md shadow-neutral-500/50 rounded-xl"
+              handlePress={handleDirectionPress}
+            />
+
+            <>
+              <Text className="text-xl font-JakartaBold mt-5 mb-3">
+                Your Current Location
+              </Text>
+              <View className="flex flex-row items-center bg-transparent h-[300px]">
+                <Map />
+              </View>
+            </>
+            <Text className="text-xl font-JakartaBold mt-5 mb-3">
+              Recent Rides
+            </Text>
           </>
         )}
         className="m-5"
