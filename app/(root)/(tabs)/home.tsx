@@ -1,11 +1,10 @@
-import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
 import { recentRides } from "@/mocks/mockRides";
-import useLocationStore from "@/store";
-import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
-import { useCallback, useEffect, useState } from "react";
+import { useLocationStore } from "@/store";
+import { useUser } from "@clerk/clerk-expo";
+import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -16,6 +15,8 @@ import {
   View,
 } from "react-native";
 import * as Location from "expo-location";
+import OlaTextInput from "@/components/OlaTextInput";
+import { router } from "expo-router";
 
 export default function Page() {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
@@ -25,7 +26,14 @@ export default function Page() {
   const [hasPermissions, setHasPermissions] = useState(false);
 
   const handleSignOut = () => {};
-  const handleDirectionPress = () => {};
+  const handleDirectionPress = (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(location);
+    router.push("/(root)/find-ride");
+  };
 
   useEffect(() => {
     const reqLocation = async () => {
@@ -75,7 +83,7 @@ export default function Page() {
         )}
         ListHeaderComponent={() => (
           <>
-            <View className="flex flex-row items-center justify-between mx-3 my-5">
+            <View className="flex flex-row items-center justify-between m-3 ">
               <View className="flex flex-col items-start justify-start ">
                 <Text className=" flex flex-col text-xl font-JakartaMedium text-gray-500">
                   Welcome 👋 {""}
@@ -96,9 +104,10 @@ export default function Page() {
               </TouchableOpacity>
             </View>
 
-            <GoogleTextInput
+            <OlaTextInput
               icon={icons.search}
-              containerStyle="bg-white shadow-md shadow-neutral-500/50 rounded-xl"
+              containerStyle="bg-white shadow-sm shadow-neutral-300 rounded-xl"
+              textInputBackgroundColor="gray "
               handlePress={handleDirectionPress}
             />
 
