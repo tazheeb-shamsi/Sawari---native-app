@@ -29,6 +29,8 @@ interface Suggestion {
 interface OlaTextInputProps {
   icon: any;
   containerStyle?: string;
+  placeholder?: string;
+  initialLocation?: string;
   textInputBackgroundColor?: string;
   handlePress: (data: {
     latitude: number;
@@ -42,6 +44,8 @@ const { height: screenHeight } = Dimensions.get("window");
 const OlaTextInput = ({
   icon,
   containerStyle,
+  placeholder,
+  initialLocation,
   textInputBackgroundColor = "white",
   handlePress,
 }: OlaTextInputProps) => {
@@ -119,7 +123,7 @@ const OlaTextInput = ({
   return (
     <View className="w-full">
       <InputField
-        placeholder="Search place to go!"
+        placeholder={placeholder || "Search place to go!"}
         icon={icon}
         containerStyle={containerStyle}
         value={userInput}
