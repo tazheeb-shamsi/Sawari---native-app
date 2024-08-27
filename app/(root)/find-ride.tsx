@@ -23,7 +23,7 @@ const FindRide = () => {
       <View className="my-3 flex-row items-center justify-center">
         <OlaTextInput
           icon={icons.target}
-          placeholder="Your current location"
+          placeholder="Your Pickup Location"
           initialLocation={userAddress!}
           containerStyle="bg-neutral-100 shadow-sm shadow-neutral-300 rounded-xl"
           textInputBackgroundColor="#f5f5f5"
@@ -33,7 +33,7 @@ const FindRide = () => {
       <View className="my-3">
         <OlaTextInput
           icon={icons.map}
-          placeholder="Your destination location"
+          placeholder="Your  Dropoff Location"
           initialLocation={destinationAddress!}
           containerStyle="bg-neutral-100 shadow-sm shadow-neutral-300 rounded-xl"
           textInputBackgroundColor="transparent"
