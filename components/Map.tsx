@@ -25,6 +25,8 @@ const Map = () => {
   });
 
   useEffect(() => {
+    // TODO: remove this
+    setDrivers(mockDrivers);
     if (Array.isArray(mockDrivers) && mockDrivers.length > 0) {
       if (!userLatitude || !userLongitude) return;
       const newMarkers = generateMarkersFromData({

@@ -1,6 +1,6 @@
 import { TextInputProps, TouchableOpacityProps } from "react-native";
 
-declare interface Driver {
+declare interface DriverProps {
   driver_id: number;
   first_name: string;
   last_name: string;
